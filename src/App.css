@@ -1,0 +1,16 @@
+
+
+/* Optional custom global styles */
+html,
+body {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Dark mode toggle support if needed */
+:root {
+  color-scheme: light dark;
+}
