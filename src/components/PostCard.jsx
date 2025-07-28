@@ -5,21 +5,27 @@ import { Link } from 'react-router-dom'
 function PostCard({ $id, title, featuredImage }) {
   return (
     <Link to={`/post/${$id}`}>
-      <div className="w-full bg-white rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer">
-        <div className="w-full flex justify-center mb-4">
+      <div className="bg-slate-800 hover:bg-slate-700 transition-colors duration-300 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl cursor-pointer border border-slate-700">
+        
+        {/* Image */}
+        <div className="w-full h-48 bg-slate-900 flex items-center justify-center overflow-hidden">
           <img
             src={appwriteService.getFileView(featuredImage)}
             alt={title}
-            className="rounded-xl max-h-48 object-contain"
+            className="object-cover w-full h-full transition-transform duration-300 hover:scale-105"
             onError={(e) => {
               e.target.onerror = null
-              e.target.src = "/fallback-image.svg"  // fallback image from public folder
+              e.target.src = "/fallback-image.svg"
             }}
           />
         </div>
-        <div className='w-full bg-[#1e293b] rounded-xl p-4 shadow-md hover:shadow-lg transition'>
-  <h2 className='text-lg font-semibold text-slate-100'>{title}</h2>
-</div>
+
+        {/* Content */}
+        <div className="p-4">
+          <h2 className="text-lg font-bold text-white leading-tight line-clamp-2">
+            {title}
+          </h2>
+        </div>
       </div>
     </Link>
   )

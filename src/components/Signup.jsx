@@ -2,19 +2,20 @@ import React, { useState, useEffect } from 'react'
 import authService from '../appwrite/auth'
 import { Link, useNavigate } from 'react-router-dom'
 import { login as authLogin } from '../store/authSlice'
-import { Button, Input, Logo } from './index.js'
+import { Button, Input, Logo, Loader } from './index.js'
 import { useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
 
 function Signup() {
     const navigate = useNavigate()
     const [error, setError] = useState("")
+    const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
     const { register, handleSubmit } = useForm()
 
-
     useEffect(() => {
         (async () => {
+            setLoading(true)
             try {
                 const currentUser = await authService.getCurrentUser()
                 if (currentUser) {
@@ -22,25 +23,35 @@ function Signup() {
                     navigate("/")
                 }
             } catch (err) {
-                // No session — proceed to show signup form
+                console.error("Session check failed:", err?.message || err)
+            } finally {
+                setLoading(false)
             }
         })()
     }, [])
 
     const create = async (data) => {
         setError("")
+        setLoading(true)
         try {
-            const account = await authService.CreateAccount(data)
-            if (account) {
-                const userData = await authService.getCurrentUser()
-                if (userData) {
-                    dispatch(authLogin(userData))
-                    navigate("/")
-                }
+            const userData = await authService.CreateAccount(data)
+            if (userData) {
+                dispatch(authLogin(userData))
+                navigate("/")
             }
         } catch (error) {
-            setError(error.message)
+            setError(error.message || "Something went wrong. Please try again.")
+        } finally {
+            setLoading(false)
         }
+    }
+
+    if (loading) {
+        return (
+            <div className="flex items-center justify-center h-screen">
+                <Loader />
+            </div>
+        )
     }
 
     return (

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { login as authLogin } from '../store/authSlice'
-import { Button, Input, Logo } from "./index"
+import { Button, Input, Logo, Loader } from "./index" // 🔥 import Spinner
 import { useDispatch } from "react-redux"
 import authService from "../appwrite/auth"
 import { useForm } from "react-hook-form"
@@ -11,38 +11,28 @@ function Login() {
     const dispatch = useDispatch()
     const { register, handleSubmit } = useForm()
     const [error, setError] = useState("")
-
-    
-   useEffect(() => {
-    (async () => {
-        try {
-            const user = await authService.getCurrentUser();
-            if (user) {
-                dispatch(authLogin(user));
-                navigate("/");
-            }
-        } catch (e) {
-            // No active session, show login form
-        }
-    })();
-}, []);
-
+    const [loading, setLoading] = useState(false) // 🔥 loading state
 
     const login = async (data) => {
         setError("")
+        setLoading(true) // 🔥 Start loading
         try {
             const session = await authService.login(data)
             if (session) {
                 const userData = await authService.getCurrentUser()
                 if (userData) {
-                    dispatch(authLogin(userData))
+                    dispatch(authLogin({ userData }))
                     navigate("/")
                 }
             }
         } catch (error) {
             setError(error.message)
+        } finally {
+            setLoading(false) // 🔥 Stop loading
         }
     }
+
+    if (loading) return <Loader /> // 🔥 Show loading spinner
 
     return (
         <div className='flex items-center justify-center w-full'>
@@ -89,6 +79,7 @@ function Login() {
                         <Button
                             type="submit"
                             className="w-full"
+                            disabled={loading} // 🔥 disable button during loading
                         >Sign in</Button>
                     </div>
                 </form>

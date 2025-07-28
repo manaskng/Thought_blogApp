@@ -9,45 +9,40 @@ function Header() {
   const userData = useSelector((state) => state.auth.userData)
   const location = useLocation()
   const navigate = useNavigate()
-
   const [showDropdown, setShowDropdown] = useState(false)
 
   const navItems = [
     { name: 'Home', slug: '/', active: true },
     { name: 'Login', slug: '/login', active: !authStatus },
     { name: 'Signup', slug: '/signup', active: !authStatus },
-    { name: 'All Posts', slug: '/all-posts', active: authStatus },
     { name: 'Add Post', slug: '/add-post', active: authStatus },
     { name: 'My Posts', slug: '/my-posts', active: authStatus },
   ]
 
   return (
-    <header className="px-4 py-2 rounded-full
-     text-cyan-400 bg-[#121828]
-      hover:text-white hover:bg-indigo-950 transition-all duration-200">
-
+    <header className="sticky top-0 z-30 backdrop-blur-lg bg-gradient-to-r from-[#0f172a]/90 to-[#1e293b]/90 shadow-lg rounded-b-2xl">
       <Container>
-        <nav className="flex items-center justify-between py-4">
+        <nav className="flex items-center justify-between py-5 px-2">
           {/* Logo */}
-          <Link to="/">
-            <Logo width="30px" />
+          <Link to="/" className="flex items-center gap-3 hover:scale-105 transition-transform">
+            <Logo width="40px" />
+            <span className="text-white font-extrabold text-2xl tracking-wide">MyBlog</span>
           </Link>
 
-          {/* Navigation Links */}
-          <ul className="flex items-center space-x-6">
+          {/* Navigation */}
+          <ul className="flex items-center gap-8">
             {navItems.map(
               (item) =>
                 item.active && (
                   <li key={item.name}>
                     <button
                       onClick={() => navigate(item.slug)}
-                      className={`relative text-sm font-medium transition duration-300 tracking-wide ${
-                        location.pathname === item.slug
-                          ? 'text-blue-400'
-                          : 'text-gray-200 hover:text-white'
-                      } before:content-[''] before:absolute before:-bottom-1 before:left-1/2 before:-translate-x-1/2
-                      before:w-0 before:h-[2px] before:bg-blue-500 before:transition-all before:duration-300
-                      hover:before:w-full`}
+                      className={`relative text-base font-medium px-2 py-1 transition-all duration-300 rounded-lg
+                        ${
+                          location.pathname === item.slug
+                            ? 'text-cyan-400 underline underline-offset-8 decoration-2'
+                            : 'text-gray-300 hover:text-white hover:bg-gray-800/40'
+                        }`}
                     >
                       {item.name}
                     </button>
@@ -55,32 +50,31 @@ function Header() {
                 )
             )}
 
-            {/* Authenticated dropdown */}
+            {/* Dropdown */}
             {authStatus && userData && (
               <li className="relative">
                 <div
-                  className="flex items-center gap-2 cursor-pointer hover:text-white"
+                  className="flex items-center gap-2 cursor-pointer hover:text-white transition-all"
                   onClick={() => setShowDropdown((prev) => !prev)}
                 >
                   <img
-                    src="\profile-image.png" 
+                    src="/profile-image.png"
                     alt="profile"
-                    className="w-8 h-8 rounded-full border border-gray-400"
+                    className="w-10 h-10 rounded-full border-2 border-cyan-500 hover:scale-105 transition"
                   />
-                  <FiChevronDown className="text-lg" />
+                  <FiChevronDown className="text-xl text-cyan-300" />
                 </div>
 
-                {/* Dropdown Menu */}
                 {showDropdown && (
-                  <div className="absolute right-0 mt-2 w-40 bg-neutral-800 shadow-lg rounded-md overflow-hidden z-20">
+                  <div className="absolute right-0 mt-3 w-48 bg-[#1f2937] text-white shadow-2xl rounded-xl border border-gray-700 z-50 animate-fade-in">
                     <Link
                       to="/profile"
-                      className="block px-4 py-2 text-sm text-gray-300 hover:bg-neutral-700"
+                      className="block px-4 py-2 text-sm hover:bg-neutral-700 transition rounded-t-xl"
                     >
                       Profile
                     </Link>
-                    <div className="border-t border-neutral-600"></div>
-                    <div className="block px-4 py-2">
+                    <div className="border-t border-neutral-700" />
+                    <div className="px-4 py-2">
                       <LogoutBtn />
                     </div>
                   </div>

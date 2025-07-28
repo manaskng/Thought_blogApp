@@ -14,43 +14,33 @@ function Home() {
         })
     }, [])
 
-    if (posts.length === 0) {
-        return (
-            <div className="w-full py-8 mt-4 text-center">
-                <Container>
-                    <div className="flex flex-wrap">
-                        <div className="p-2 w-full">
-                            <h1 className="text-2xl font-bold hover:text-gray-500">
-                                Login to read posts
-                            </h1>
-                        </div>
-                    </div>
-                </Container>
-            </div>
-        )
-    }
-
     return (
-        <div className="w-full py-8">
+        <div className="w-full py-12 bg-gradient-to-b from-slate-900 via-slate-950 to-black min-h-[80vh] text-white">
             <Container>
-                {/* Welcome Heading */}
-                <div className="text-center mb-10">
-                    <h1 className="text-4xl font-extrabold text-white drop-shadow-sm">
-                        Welcome to the Home Page
+                {/* Heading */}
+                <div className="text-center mb-12">
+                    <h1 className="text-4xl font-extrabold tracking-tight drop-shadow-sm">
+                        {posts.length > 0 ? "Latest Posts" : "Welcome to the Blog"}
                     </h1>
-                    <p className="text-gray-500 mt-2 text-sm">
-                        Dive into thoughts shared by the community
+                    <p className="text-muted text-sm mt-2">
+                        {posts.length > 0
+                            ? "Stay curious. Discover stories, thinking, and expertise from the community."
+                            : "Login to read and create amazing posts from the community."}
                     </p>
                 </div>
 
                 {/* Posts Grid */}
-                <div className="flex flex-wrap">
-                    {posts.map((post) => (
-                        <div key={post.$id} className="p-2 w-full sm:w-1/2 lg:w-1/4">
-                            <PostCard {...post} />
-                        </div>
-                    ))}
-                </div>
+                {posts.length > 0 ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {posts.map((post) => (
+                            <PostCard key={post.$id} {...post} />
+                        ))}
+                    </div>
+                ) : (
+                    <div className="flex justify-center mt-12">
+                        <h2 className="text-xl font-semibold text-muted">No posts yet. Be the first to write!</h2>
+                    </div>
+                )}
             </Container>
         </div>
     )
