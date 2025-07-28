@@ -1,4 +1,5 @@
 #  Thought Blog
+Deployed at Vercel: https://thought-blog-app.vercel.app/
 
 A modern full-stack  Authenticated blogging platform built with React and Appwrite as BaaS, designed for clean reading, seamless writing, and thoughtful expression.
 
