@@ -4,7 +4,29 @@ Deployed at Vercel: https://thought-blog-app.vercel.app/
 A modern full-stack  Authenticated blogging platform built with React and Appwrite as BaaS, designed for clean reading, seamless writing, and thoughtful expression.
 
 ---
+Live Demo:https://thought-blog-app.vercel.app/
 
+  
+ ### Features Demo
+ Authentication
+ <img width="1869" height="757" alt="image" src="https://github.com/user-attachments/assets/f13db252-d0f8-41fe-8789-182ceaddf5ff" />
+<img width="1859" height="857" alt="image" src="https://github.com/user-attachments/assets/240e07d1-ffa8-4a0b-b8d8-f22dbbf2d9ac" />
+
+Home page
+<img width="1880" height="890" alt="image" src="https://github.com/user-attachments/assets/40146bad-7d36-40f2-8f8e-aa0cede166c2" />
+
+YourPosts 
+<img width="1705" height="892" alt="image" src="https://github.com/user-attachments/assets/9fa39d41-b5c5-461f-960a-13634a91b461" />
+
+PostCard 
+<img width="1582" height="791" alt="image" src="https://github.com/user-attachments/assets/8cae5228-47e0-431c-8684-f7db0f59c25b" />
+
+Rich-text Editor and slug-based Indexing 
+<img width="1842" height="799" alt="image" src="https://github.com/user-attachments/assets/1c6f7339-054d-4a02-a7b8-2e4adfadd0dc" />
+
+
+
+---
 ## ⚙ Tech Stack
 
 ### Frontend
@@ -27,27 +49,6 @@ features of
 -  **Git & GitHub**
 -  **npm / yarn**
 -  **ESLint & Prettier**
-  
- ### Features Demo
- Authentication
- <img width="1869" height="757" alt="image" src="https://github.com/user-attachments/assets/f13db252-d0f8-41fe-8789-182ceaddf5ff" />
-<img width="1859" height="857" alt="image" src="https://github.com/user-attachments/assets/240e07d1-ffa8-4a0b-b8d8-f22dbbf2d9ac" />
-
-Home page
-<img width="1880" height="890" alt="image" src="https://github.com/user-attachments/assets/40146bad-7d36-40f2-8f8e-aa0cede166c2" />
-
-YourPosts 
-<img width="1705" height="892" alt="image" src="https://github.com/user-attachments/assets/9fa39d41-b5c5-461f-960a-13634a91b461" />
-
-PostCard 
-<img width="1582" height="791" alt="image" src="https://github.com/user-attachments/assets/8cae5228-47e0-431c-8684-f7db0f59c25b" />
-
-Rich-text Editor and slug-based Indexing 
-<img width="1842" height="799" alt="image" src="https://github.com/user-attachments/assets/1c6f7339-054d-4a02-a7b8-2e4adfadd0dc" />
-
-
-
----
 
 ## ✨ Features
 
